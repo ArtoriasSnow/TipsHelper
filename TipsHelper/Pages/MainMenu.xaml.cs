@@ -8,6 +8,7 @@ namespace TipsHelper
 	public partial class MainMenu : ContentPage
 	{
 		private double StepValue;
+		private int percent;
 
 		public MainMenu()
 		{
@@ -18,6 +19,8 @@ namespace TipsHelper
 
 		public void SetSliderBehaviour()
 		{
+			//El porcentaje de propinas es desde 0 al 30%, por lo que se establecen tramos de 5 en 5
+			//El slider comprende valores 1.0 a 1.30 (para facilitar el cálculo directo) por lo que stepValue vale 0.05
 			StepValue = 0.05;
 			sliderQualityService.ValueChanged += OnSliderValueChanged;
 		}
@@ -56,13 +59,14 @@ namespace TipsHelper
 
 		
 			labelQualityServiceDesc.Text =  step * 100 + "%";
+			percent = (int) step * 100;
 
-			if (step*100 < 15)
+			if (percent < 15)
 			{
 
 				labelQualityServiceDesc.TextColor = Color.Red;
 			}
-			else if (step*100 >= 15 && step*100 < 20)
+			else if (percent >= 15 && percent < 20)
 			{
 				labelQualityServiceDesc.TextColor = Color.Black;
 			}
